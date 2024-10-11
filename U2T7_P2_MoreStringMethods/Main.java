@@ -23,7 +23,7 @@ public class Main {
                 score -= 10;
                 System.out.println("-10 points: current word is the same as the previous word; SCORE: " + score);
             }
-            if (currentWord.substring(currentWord.length() - 2).equals(previousWord.substring(0, 2))) {
+            if (currentWord.substring(0,2).equals(previousWord.substring(previousWord.length() - 2))) {
                 score += 5;
                 System.out.println("+5 points: first two letters of current word match last two letters of previous word; SCORE: " + score);
             }
@@ -32,10 +32,18 @@ public class Main {
                 score += 3;
                 System.out.println("+3 points: the first letter of the previous word was found in your current word; SCORE: " + score);
             }
-            wordCount++;
+            if(currentWord.length() == previousWord.length()) {
+                score += 5;
+                System.out.println("+5 points: the current word and the previous word are the same length; SCORE: " + score);
+            }
             if (score < 50) {
-                
+                System.out.print("Enter next word: ");
+                previousWord = currentWord;
+                currentWord = scan.nextLine();
+                wordCount++;
             }
         }
+        System.out.println("You win! It took you " + wordCount + " words! Try again for a lower word count :)");
+        scan.close();
     }
 }
